@@ -1,4 +1,4 @@
-ublic class DiningPhilosophers {
+public class DiningPhilosophers {
 
   public static void main(String[] args) throws InterruptedException {
 
@@ -11,6 +11,8 @@ ublic class DiningPhilosophers {
       philosophers[i] = new Philosopher(i, chopsticks[i], chopsticks[(i + 1) % 5]);
       philosophers[i].start(); // Philospher amount
     }
-    for (int i = 0; i < 5; ++i)
+    for (int i = 0; i < 5; ++i){
       philosophers[i].join();
   }
+}
+}
