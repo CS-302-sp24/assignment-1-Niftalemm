@@ -19,14 +19,22 @@ public class DiningPhilosophers {
     Philosopher[] philosophers = new Philosopher[np]; // The number of philosophers
     Chopstick[] chopsticks = new Chopstick[np]; // The number of Chopsticks
     
-    for (int i = 0; i < 5; ++i)
+    for (int i = 0; i < np; ++i)
       chopsticks[i] = new Chopstick(i); //creats chopsticks
-    for (int i = 0; i < 5; ++i) {
+    for (int i = 0; i < np; ++i) {
+      if(rl != 0){
+        philosophers[i] = new Philosopher(chopsticks[i], chopsticks[(i + 1) % np], nc, tt, et, 0);
+      }
+
+      
       philosophers[i] = new Philosopher(i, chopsticks[i], chopsticks[(i + 1) % 5]);
       philosophers[i].start(); // Philospher amount
     }
-    for (int i = 0; i < 5; ++i){
+    for (int i = 0; i < np; ++i){
       philosophers[i].join();
   }
 }
 }
+
+//Soultion
+

@@ -1,11 +1,60 @@
 import java.util.Random;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.ReentrantLock;
 
 class Philosopher extends Thread {
-  private Chopstick first, second;
-  private Chopstick left, right; 
+  //variables for solution 1
+  private Chopstick left, right;
   private Random random;
   private int thinkCount;
+  private int tt;
+  private int et;
+  private int nc;
+  private int handed; //0 = right handed, 1 = left handed.
+  private Chopstick first, second;
+
+  //Variables for solution 2
+  private boolean eating;
+  private Philosopher leftP;
+  private Philosopher rightP;
+  private ReentrantLock table;
+  private Condition condition;
+  private Random rand;
+  
   private int id; // this will help us identify the philospher number
+
+  //Solution 1 constructor
+  public Philosopher(Chopstick left, Chopstick right, int nc, int tt, int et, int handed) {
+    this.left = left;
+    this.right = right;
+    this.nc = nc;
+    this.tt = tt;
+    this.et = et;
+    this.handed = handed;
+    random = new Random();
+  }
+
+  //solution 2 constructor
+  public Philosopher(ReentrantLock table){
+    eating = false;
+    this.table = table;
+    condition = table.newCondition();
+    rand = new Random();
+  }
+
+  public void setLeft(Philosopher leftP){this.leftP = leftP;}
+  public void setRight(Philosopher rightP){this.rightP = rightP;}
+
+  public void runSolutionTwo(){
+
+    try{
+      while(true){
+        think();
+        eat();
+      }
+    }catch(InterruptedException e){}
+  //eating = false;
+}
 
   public Philosopher(int id, Chopstick left, Chopstick right) {
 
