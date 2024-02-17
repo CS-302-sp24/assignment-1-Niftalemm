@@ -14,6 +14,7 @@ public class DiningPhilosophers {
     int np = Integer.parseInt(stringNp);
     int nc = Integer.parseInt(stringNc);
     int tt = Integer.parseInt(stringTt);
+  
     int et = Integer.parseInt(stringEt);
     int rl = Integer.parseInt(stringRl);
 
