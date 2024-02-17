@@ -53,7 +53,7 @@ public class DiningPhilosophers {
     for (int i = 0; i < np; ++i)
       philosophersTwo[i] = new Philosopher(lockerson);
     for (int i = 0; i < np; ++i) {
-      philosophersTwo[i].setLeft(philosophersTwo[(i + np-1) % np]); //Not sure what 4 is here... I Switched it to np - 1 because it makes sense
+      philosophersTwo[i].setLeft(philosophersTwo[(i + np-1) % np]);
       philosophersTwo[i].setRight(philosophersTwo[(i + 1) % np]);
       System.out.println("run?");
       philosophersTwo[i].runSolutionTwo();
