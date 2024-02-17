@@ -73,14 +73,14 @@ private void eat() throws InterruptedException{
   table.lock();
   try{
     while(leftP.eating || rightP.eating){
-      eating = false; //Hopefully this makesit work
+      eating = false; //Hopefully this makes it work
       condition.await();
     }
     eating = true;
   }
     finally {table.unlock();}
     Thread.sleep(1000);
-    //eating = false;
+    
 }
 
 //solution 1 default thread method

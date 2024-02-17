@@ -1,3 +1,5 @@
+import java.util.concurrent.locks.ReentrantLock;
+
 public class DiningPhilosophers {
 
   public static void main(String[] args) throws InterruptedException {
@@ -16,7 +18,7 @@ public class DiningPhilosophers {
     int rl = Integer.parseInt(stringRl);
 
 
-    // Solution 1
+    // 1st Solution
     long startTime = System.currentTimeMillis();
 
 
@@ -40,9 +42,31 @@ public class DiningPhilosophers {
 
     long endTime = System.currentTimeMillis();
     System.out.println("Time elapsed: " + (endTime - startTime) + "ms, First Solution");
+
+    //Solution 2
+    long startTimeTwo = System.currentTimeMillis();
+    
+    //Init arrys to the amount provided in args.
+    Philosopher[] philosophersTwo = new Philosopher[np];
+    ReentrantLock lockerson = new ReentrantLock();
+    
+    for (int i = 0; i < np; ++i)
+      philosophersTwo[i] = new Philosopher(lockerson);
+    for (int i = 0; i < np; ++i) {
+      philosophersTwo[i].setLeft(philosophersTwo[(i + np-1) % np]); //Not sure what 4 is here... I Switched it to np - 1 because it makes sense
+      philosophersTwo[i].setRight(philosophersTwo[(i + 1) % np]);
+      System.out.println("run?");
+      philosophersTwo[i].runSolutionTwo();
+      System.out.println("ran!");
+    }
+    for (int i = 0; i < np; ++i){
+      System.out.println("join?");
+      philosophersTwo[i].join();
+      System.out.println("join!");
+    }
+    long endTimeTwo = System.currentTimeMillis();
+    System.out.println("Time elapsed: " + (endTimeTwo - startTimeTwo) + "ms, First Solution");
+
+  }
   
 }
-}
-
-//Soultion
-
