@@ -83,44 +83,124 @@ private void eat() throws InterruptedException{
     //eating = false;
 }
 
+//solution 1 default thread method
+public void run() {
+  try {
+    long threadId = this.getId() - 13;
+    if(nc != 0 ){
+      for(int i = 0; i < nc; i++){
 
-  public Philosopher(int id, Chopstick left, Chopstick right) {
-
-    if(left.getId() < right.getId()){ //Instead of holding to left and right chopsticks, we now hold on to first and second
-      first = left; second = right;
-    }else{
-      first = right; second = left;
-    }
-    random = new Random();
-
-
-
-    this.left = left; this.right = right;
-    random = new Random();
-    this.id = id;
-  }
-
-  /*private void think() throws InterruptedException {
-    System.out.println("Philispher: "+ id + "is thinking for the next ");
-    Thread.sleep(random.nextInt(1000)); //This will simlutate thinking time
-  }*/
-
-  public void run() {
-    try {
-      while(true) {
         ++thinkCount;
-        if (thinkCount % 10 == 0)
-          System.out.println("Philosopher " + this + " has thought " + thinkCount + " times");
-          think(); // This will use our think method to make our philospher think 
-        synchronized(left) { 
-          System.out.println("Philosopher " + id + " wants left chopstick");  // Grab left chopstick 
-          synchronized(right) { 
-            System.out.println("Philosopher " + id + " wants right chopstick"); // Grab right chopstick 
-            Thread.sleep(random.nextInt(1000)); // Eat for a while
+        if (thinkCount % 10 == 0) {
+          // System.out.println("Philosopher " + threadId + " has thought " + thinkCount + " times");
+          // Think for a while
+          int randTT = 0;
+          if (tt != 0){
+            randTT = random.nextInt(tt);
+          }
+          Thread.sleep(randTT);
+          // System.out.println("Philosopher " + threadId + " thinks for " + randTT + " units");
+
+
+          if(handed != 0){
+            // System.out.println("Philosopher " + threadId + " wants left chopstick");
+            synchronized(left) {                    // Grab left chopstick 
+              // System.out.println("Philosopher " + threadId + " has left chopstick");
+              synchronized(right) {                 // Grab right chopstick 
+                // System.out.println("Philosopher " + threadId + " has right chopstick");
+                int randET = 0;
+                if (et != 0) {
+                  randET = random.nextInt(et);
+                }
+                Thread.sleep(randET); // Eat for a while
+                // System.out.println("Philosopher " + threadId + " eats for " + randET + " units");
+              }
+            }
+            
+          }
+          else{
+            // System.out.println("Philosopher " + threadId + " wants right chopstick");
+            synchronized(right) {                    // Grab left chopstick 
+              // System.out.println("Philosopher " + threadId + " has right chopstick");
+              // System.out.println("Philosopher " + threadId + " wants left chopstick");
+              synchronized(left) {                 // Grab right chopstick 
+                // System.out.println("Philosopher " + threadId + " has left chopstick");
+                int randET = 0;
+                if (et != 0) {
+                  randET = random.nextInt(et);
+                }
+                Thread.sleep(randET); // Eat for a while
+                // System.out.println("Philosopher " + threadId + " eats for " + randET + " units");
+              }
+            }
+            
           }
         }
       }
-    } catch(InterruptedException e) {
+      
     }
-  }
+
+    else{
+      while(true){
+        ++thinkCount;
+        if (thinkCount % 10 == 0) {
+          // System.out.println("Philosopher " + threadId + " has thought " + thinkCount + " times");
+          // Think for a while
+          int randTT = 0;
+          if (tt != 0){
+            randTT = random.nextInt(tt);
+          }
+          Thread.sleep(randTT);
+          // System.out.println("Philosopher " + threadId + " thinks for " + randTT + " units");
+
+
+          if(handed == 0){
+            // System.out.println("Philosopher " + threadId + " wants right chopstick");
+            synchronized(right) {                    // Grab left chopstick 
+              synchronized(left) {                 // Grab right chopstick 
+                // System.out.println("Philosopher " + threadId + " has left chopstick");
+                int randET = 0;
+                if (et != 0) {
+                  randET = random.nextInt(et);
+                }
+                Thread.sleep(randET); // Eat for a while
+                // System.out.println("Philosopher " + threadId + " eats for " + randET + " units");
+              }
+            }
+          }
+          else{
+            // System.out.println("Philosopher " + threadId + " wants left chopstick");
+            synchronized(left) {                    // Grab left chopstick 
+              // System.out.println("Philosopher " + threadId + " has left chopstick");
+              // System.out.println("Philosopher " + threadId + " wants right chopstick");
+              synchronized(right) {                 // Grab right chopstick 
+                // System.out.println("Philosopher " + threadId + " has right chopstick");
+                int randET = 0;
+                if (et != 0) {
+                  randET = random.nextInt(et);
+                }
+                Thread.sleep(randET); // Eat for a while
+                // System.out.println("Philosopher " + threadId + " eats for " + randET + " units");
+              }
+            }
+          }
+        }
+      }
+
+      
+
+
+    }
+
+
+      
+  } catch(InterruptedException e) {}
+  
 }
+
+}
+
+ 
+
+
+

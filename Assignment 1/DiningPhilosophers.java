@@ -16,6 +16,10 @@ public class DiningPhilosophers {
     int rl = Integer.parseInt(stringRl);
 
 
+    // Solution 1
+    long startTime = System.currentTimeMillis();
+
+
     Philosopher[] philosophers = new Philosopher[np]; // The number of philosophers
     Chopstick[] chopsticks = new Chopstick[np]; // The number of Chopsticks
     
@@ -23,16 +27,20 @@ public class DiningPhilosophers {
       chopsticks[i] = new Chopstick(i); //creats chopsticks
     for (int i = 0; i < np; ++i) {
       if(rl != 0){
+        philosophers[i] = new Philosopher(chopsticks[i], chopsticks[(i + 1) % np], nc, tt, et, i % 2);
+      }
+      else{
         philosophers[i] = new Philosopher(chopsticks[i], chopsticks[(i + 1) % np], nc, tt, et, 0);
+      }
       }
 
       
-      philosophers[i] = new Philosopher(i, chopsticks[i], chopsticks[(i + 1) % 5]);
-      philosophers[i].start(); // Philospher amount
-    }
-    for (int i = 0; i < np; ++i){
+    for (int i = 0; i < np; ++i)
       philosophers[i].join();
-  }
+
+    long endTime = System.currentTimeMillis();
+    System.out.println("Time elapsed: " + (endTime - startTime) + "ms, First Solution");
+  
 }
 }
 
