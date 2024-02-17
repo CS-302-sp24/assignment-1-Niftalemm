@@ -1,3 +1,5 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class DiningPhilosophers {
@@ -26,18 +28,23 @@ public class DiningPhilosophers {
     Philosopher[] philosophers = new Philosopher[np]; // The number of philosophers
     Chopstick[] chopsticks = new Chopstick[np]; // The number of Chopsticks
     
-    for (int i = 0; i < np; ++i)
-      chopsticks[i] = new Chopstick(i); //creats chopsticks
-    for (int i = 0; i < np; ++i) {
-      if(rl != 0){
-        philosophers[i] = new Philosopher(chopsticks[i], chopsticks[(i + 1) % np], nc, tt, et, i % 2);
-      }
-      else{
-        philosophers[i] = new Philosopher(chopsticks[i], chopsticks[(i + 1) % np], nc, tt, et, 0);
-      }
-      }
+    // Checks if the file exists
+     try (FileWriter traceWriter = new FileWriter("Trace.txt"))  {
+      for (int i = 0; i < np; ++i)
+        chopsticks[i] = new Chopstick(i); //creats chopsticks
+      for (int i = 0; i < np; ++i) {
+        if(rl != 0){
+          philosophers[i] = new Philosopher(chopsticks[i], chopsticks[(i + 1) % np], nc, tt, et, i % 2, traceWriter);
+        }
+        else{
+          philosophers[i] = new Philosopher(chopsticks[i], chopsticks[(i + 1) % np], nc, tt, et, 0, traceWriter);
+        }
+        }
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
 
-      
     for (int i = 0; i < np; ++i)
       philosophers[i].join();
 
