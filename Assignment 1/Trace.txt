@@ -3,3 +3,4 @@ Trace.txt
 Based on resources online and watching vidoes on how i can best do this assignment I have tried utilizing the filewriter class to update the
 Trace.Txt but that is not the case but I hope this shows a bit of my effort in trying to provide answers and a solution. Thank You for the extension.
 
+I have had deadlocs with my orignal tries and tried to use semaphores.
