@@ -56,6 +56,34 @@ class Philosopher extends Thread {
   //eating = false;
 }
 
+private void think() throws InterruptedException{
+  table.lock();
+  try{
+    eating = false;
+    leftP.condition.signal();
+    rightP.condition.signal();
+  }finally {table.unlock();}
+  Thread.sleep(1000);
+}
+
+
+
+
+private void eat() throws InterruptedException{
+  table.lock();
+  try{
+    while(leftP.eating || rightP.eating){
+      eating = false; //Hopefully this makesit work
+      condition.await();
+    }
+    eating = true;
+  }
+    finally {table.unlock();}
+    Thread.sleep(1000);
+    //eating = false;
+}
+
+
   public Philosopher(int id, Chopstick left, Chopstick right) {
 
     if(left.getId() < right.getId()){ //Instead of holding to left and right chopsticks, we now hold on to first and second
@@ -72,10 +100,10 @@ class Philosopher extends Thread {
     this.id = id;
   }
 
-  private void think() throws InterruptedException {
+  /*private void think() throws InterruptedException {
     System.out.println("Philispher: "+ id + "is thinking for the next ");
     Thread.sleep(random.nextInt(1000)); //This will simlutate thinking time
-  }
+  }*/
 
   public void run() {
     try {
