@@ -83,7 +83,7 @@ private void eat() throws InterruptedException{
     
 }
 
-//solution 1 default thread method
+//solution 1 thread method
 public void run() {
   try {
     long threadId = this.getId() - 13;
@@ -92,45 +92,45 @@ public void run() {
 
         ++thinkCount;
         if (thinkCount % 10 == 0) {
-          // System.out.println("Philosopher " + threadId + " has thought " + thinkCount + " times");
+          System.out.println("Philosopher " + threadId + " has thought " + thinkCount + " times");
           // Think for a while
           int randTT = 0;
           if (tt != 0){
             randTT = random.nextInt(tt);
           }
           Thread.sleep(randTT);
-          // System.out.println("Philosopher " + threadId + " thinks for " + randTT + " units");
+          System.out.println("Philosopher " + threadId + " thinks for " + randTT + " units");
 
 
           if(handed != 0){
-            // System.out.println("Philosopher " + threadId + " wants left chopstick");
+            System.out.println("Philosopher " + threadId + " wants left chopstick");
             synchronized(left) {                    // Grab left chopstick 
-              // System.out.println("Philosopher " + threadId + " has left chopstick");
+              System.out.println("Philosopher " + threadId + " has left chopstick");
               synchronized(right) {                 // Grab right chopstick 
-                // System.out.println("Philosopher " + threadId + " has right chopstick");
+                System.out.println("Philosopher " + threadId + " has right chopstick");
                 int randET = 0;
                 if (et != 0) {
                   randET = random.nextInt(et);
                 }
                 Thread.sleep(randET); // Eat for a while
-                // System.out.println("Philosopher " + threadId + " eats for " + randET + " units");
+                System.out.println("Philosopher " + threadId + " eats for " + randET + " units");
               }
             }
             
           }
           else{
-            // System.out.println("Philosopher " + threadId + " wants right chopstick");
+            System.out.println("Philosopher " + threadId + " wants right chopstick");
             synchronized(right) {                    // Grab left chopstick 
-              // System.out.println("Philosopher " + threadId + " has right chopstick");
-              // System.out.println("Philosopher " + threadId + " wants left chopstick");
+              System.out.println("Philosopher " + threadId + " has right chopstick");
+              System.out.println("Philosopher " + threadId + " wants left chopstick");
               synchronized(left) {                 // Grab right chopstick 
-                // System.out.println("Philosopher " + threadId + " has left chopstick");
+                System.out.println("Philosopher " + threadId + " has left chopstick");
                 int randET = 0;
                 if (et != 0) {
                   randET = random.nextInt(et);
                 }
                 Thread.sleep(randET); // Eat for a while
-                // System.out.println("Philosopher " + threadId + " eats for " + randET + " units");
+                System.out.println("Philosopher " + threadId + " eats for " + randET + " units");
               }
             }
             
@@ -144,43 +144,43 @@ public void run() {
       while(true){
         ++thinkCount;
         if (thinkCount % 10 == 0) {
-          // System.out.println("Philosopher " + threadId + " has thought " + thinkCount + " times");
+          System.out.println("Philosopher " + threadId + " has thought " + thinkCount + " times");
           // Think for a while
           int randTT = 0;
           if (tt != 0){
             randTT = random.nextInt(tt);
           }
           Thread.sleep(randTT);
-          // System.out.println("Philosopher " + threadId + " thinks for " + randTT + " units");
+          System.out.println("Philosopher " + threadId + " thinks for " + randTT + " units");
 
 
           if(handed == 0){
-            // System.out.println("Philosopher " + threadId + " wants right chopstick");
+            System.out.println("Philosopher " + threadId + " wants right chopstick");
             synchronized(right) {                    // Grab left chopstick 
               synchronized(left) {                 // Grab right chopstick 
-                // System.out.println("Philosopher " + threadId + " has left chopstick");
+                System.out.println("Philosopher " + threadId + " has left chopstick");
                 int randET = 0;
                 if (et != 0) {
                   randET = random.nextInt(et);
                 }
                 Thread.sleep(randET); // Eat for a while
-                // System.out.println("Philosopher " + threadId + " eats for " + randET + " units");
+                System.out.println("Philosopher " + threadId + " eats for " + randET + " units");
               }
             }
           }
           else{
-            // System.out.println("Philosopher " + threadId + " wants left chopstick");
+            System.out.println("Philosopher " + threadId + " wants left chopstick");
             synchronized(left) {                    // Grab left chopstick 
-              // System.out.println("Philosopher " + threadId + " has left chopstick");
-              // System.out.println("Philosopher " + threadId + " wants right chopstick");
+              System.out.println("Philosopher " + threadId + " has left chopstick");
+              System.out.println("Philosopher " + threadId + " wants right chopstick");
               synchronized(right) {                 // Grab right chopstick 
-                // System.out.println("Philosopher " + threadId + " has right chopstick");
+                System.out.println("Philosopher " + threadId + " has right chopstick");
                 int randET = 0;
                 if (et != 0) {
                   randET = random.nextInt(et);
                 }
                 Thread.sleep(randET); // Eat for a while
-                // System.out.println("Philosopher " + threadId + " eats for " + randET + " units");
+                System.out.println("Philosopher " + threadId + " eats for " + randET + " units");
               }
             }
           }
